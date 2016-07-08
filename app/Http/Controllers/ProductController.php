@@ -40,23 +40,10 @@ class ProductController extends Controller
         $products = [];
         $categories = Category::all();
 
-        if ($request->category == '' && $request->search != '') {
-            $products = Product::orderBy('id', 'Desc')
-            ->where('name', 'like', '%'.$request->search.'%')
-            ->orWhere('price', 'like', '%'.$request->search.'%')
-            ->paginate(10);
-        } elseif ($request->category != '' && $request->search = '') {
-            $products = Product::orderBy('id', 'Desc')
-            ->where('category_id', $request->category)
-            ->paginate(10);
-        } else {
-            $products = Product::orderBy('id', 'Desc')
+        $products = Product::orderBy('id', 'Desc')
             ->where('category_id', $request->category)
             ->where('name', 'like', '%'.$request->search.'%')
-            ->orWhere('price', 'like', '%'.$request->search.'%')
             ->paginate(10);
-        }
-        
 
         if (!is_null($products)) {
             return view('page.search', compact('products', 'categories'));

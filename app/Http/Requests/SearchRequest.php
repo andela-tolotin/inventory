@@ -25,6 +25,7 @@ class SearchRequest extends Request
     {
         return [
             'search' => 'required',
+            'category' => 'required',
         ];
     }
 }

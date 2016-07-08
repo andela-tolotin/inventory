@@ -18,8 +18,10 @@ class SearchProducTest extends TestCase
     {
         $this->visit('/search')
         ->type('', 'search')
+        ->type('', 'category')
         ->press('Search')
-        ->see('The search field is required.');
+        ->see('The search field is required.')
+        ->see('The category field is required.');
     }
 
     public function testSearchFunction()
@@ -29,6 +31,7 @@ class SearchProducTest extends TestCase
 
         $this->visit('/search')
         ->type($product->name, 'search')
+        ->select($category->id, 'category')
         ->press('Search')
         ->seePageIs('/search-form')
         ->see($product->name)
