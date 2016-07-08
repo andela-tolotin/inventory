@@ -34,6 +34,6 @@ class CreateProduct extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('products');
     }
 }
