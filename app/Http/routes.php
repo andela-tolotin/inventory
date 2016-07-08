@@ -15,6 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/add-product', function () {
-    return view('page.add_product');
-});
+Route::get('/add-product', 'HomeController@loadAddProductForm');
+
+Route::post('/product/create', 'ProductController@addProduct');
