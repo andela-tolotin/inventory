@@ -31,7 +31,7 @@ class SearchProducTest extends TestCase
 
         $this->visit('/search')
         ->type($product->name, 'search')
-        ->select($category->id, 'category')
+        ->select(1, 'category')
         ->press('Search')
         ->seePageIs('/search-form')
         ->see($product->name)
