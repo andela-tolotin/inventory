@@ -16,8 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('/add-product', 'HomeController@loadAddProductForm');
-Route::get('/search', function () {
-    return view('page.search');
-});
+Route::get('/search', 'ProductController@loadSeachForm');
+Route::post('/search-form', 'ProductController@search');
 
 Route::post('/product/create', 'ProductController@addProduct');
