@@ -39,7 +39,8 @@
     <body>
         <div class="container">
             <div class="content">
-                    <ul>
+                    <ul class="list-inline">
+                     <li><a href="/">Home</a></li>
                      <li><a href="/add-product">Add Product</a></li>
                       <li><a href="/search">Search</a></li>
                     </ul>
