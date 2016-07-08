@@ -1,7 +1,6 @@
 @extends('master')
 @section('content')
 <div>
-    <h4>Welcome to Add Product Page</h4>
     <div class="product_form">
         @if (count($errors) > 0)
         <!-- Form Error List -->
@@ -17,24 +16,46 @@
         @else
         {{ session('status') }}
         @endif
-        <form action="/search-form" method="POST" class="form">
+        <form action="/search-form" method="POST" class="form-inline">
             <input type="hidden" name="_token" value="{{  csrf_token()  }}">
             <div class="form-group">
                 <input type="text" name="search" value="{{ old('search')}}" placeholder="Enter your search keyword" class="form-control">
-                <button type="submit" class="btn btn-primary align-left">Search</button>
             </div>
+            <select name="category" class="form-control">
+                <option value="">Choose</option>
+                @foreach($categories as $category)
+                <option value="{{ $category->id }}"> {{ ucwords($category->name)}}</option>
+                @endforeach
+            </select>
+            <button type="submit" class="btn btn-primary align-left">Search</button>
         </form>
         @if (count($products) > 0)
-        <ul class="list-inline">
-            @foreach($products as $product)
-            <li>{{ ucwords($product->category->name) }} | {{ ucwords($product->name) }} | {{ $product->price }}</li>
-            @endforeach
-        </ul>
+        <table class="table table-hovered" style="font-size:22px; margin-top:50px;">
+            <thead>
+                <tr>
+                    <td>SN</td>
+                    <td>Category</td>
+                    <td>Name</td>
+                    <td>Price</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($products as $index => $product)
+                <tr>
+                    <td>{{ $index + 1}}</td>
+                    <td>{{ ucwords($product->category->name) }}</td>
+                    <td>{{ ucwords($product->name) }}</td>
+                    <td>{{ $product->price }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        
         @if (count($products) > 0)
         {!! $products->render() !!}
         @endif
         @else
-        <h2>No product matches your search</h2>
+        <h4>No product matches your search</h4>
         @endif
     </div>
 </div>

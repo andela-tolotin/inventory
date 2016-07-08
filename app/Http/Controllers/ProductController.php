@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Inventory\Http\Requests;
 use Inventory\Product;
+use Inventory\Category;
 use Inventory\Http\Requests\ProductRequest;
 use Inventory\Http\Requests\SearchRequest;
 
@@ -29,19 +30,38 @@ class ProductController extends Controller
     public function loadSeachForm()
     {
         $products = [];
-         return view('page.search', compact('products'));
+        $categories = Category::all();
+
+        return view('page.search', compact('products','categories'));
     }
 
     public function search(SearchRequest $request)
     {
-        $products = Product::orderBy('id', 'Desc')
-        ->where('name', 'like', '%'.$request->search.'%')
-        ->orWhere('price', 'like', '%'.$request->search.'%')
-        ->paginate(5);
+        $products = [];
+        $categories = Category::all();
+
+        if ($request->category == '' && $request->search != '') {
+            $products = Product::orderBy('id', 'Desc')
+            ->where('name', 'like', '%'.$request->search.'%')
+            ->orWhere('price', 'like', '%'.$request->search.'%')
+            ->paginate(10);
+        } elseif ($request->category != '' && $request->search = '') {
+            $products = Product::orderBy('id', 'Desc')
+            ->where('category_id', $request->category)
+            ->paginate(10);
+        } else {
+            $products = Product::orderBy('id', 'Desc')
+            ->where('category_id', $request->category)
+            ->where('name', 'like', '%'.$request->search.'%')
+            ->orWhere('price', 'like', '%'.$request->search.'%')
+            ->paginate(10);
+        }
+        
 
         if (!is_null($products)) {
-            return view('page.search', compact('products'));
+            return view('page.search', compact('products', 'categories'));
         }
+
         return view('page.search', compact('products'));
     }
 
