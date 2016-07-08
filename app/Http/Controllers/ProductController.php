@@ -24,4 +24,5 @@ class ProductController extends Controller
 
         return rediect('/add-product')->with('status', 'Product Not Added Successfully');
     }
+
 }
