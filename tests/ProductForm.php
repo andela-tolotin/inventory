@@ -6,16 +6,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ProductForm extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testExample()
-    {
-        $this->assertTrue(true);
-    }
-
     public function testThatUserIsRedirectedToAddProductPage()
     {
         $this->visit('/')
