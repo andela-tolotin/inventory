@@ -23,4 +23,14 @@ class ProductForm extends TestCase
         ->seePageIs('/add-product');
 
     }
+
+    public function testThatProductFormWasFilledAndSubmitted()
+    {
+        $this->visit('/add-product')
+        ->type('Product Name', 'name')
+        ->type('Product Category', 'category')
+        ->type('Product Price', 'price')
+        ->press('Add')
+        ->see('Product Added Successfully');
+    }
 }
