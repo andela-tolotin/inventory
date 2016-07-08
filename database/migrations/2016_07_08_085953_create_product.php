@@ -12,7 +12,19 @@ class CreateProduct extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('products', function(Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->integer('price');
+            $table->integer('category_id')->unsigned->default(1);
+            $table->timestamps();
+
+            $table->foreign('categories')
+               ->references('category_id')
+               ->on('products')
+               ->onDelete('cascade');
+
+        });
     }
 
     /**
