@@ -41,6 +41,7 @@
                 <div class="title">
                     <ul>
                      <li><a href="/add-product">Add Product</a></li>
+                     <li><a href="/search">Search</a></li>
                     </ul>
                 </div>
             </div>
