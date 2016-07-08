@@ -7,6 +7,9 @@
             <input type="hidden" name="_token" value="{{  csrf_token()  }}">
             Category : <select name="category">
                 <option>Choose</option>
+                @foreach($categories as $category)
+                <option value="{{ $category->id }}"> {{ ucwords($category->name)}}</option>
+                @endforeach
             </select> <br/>
             Name: <input type="text" name="name" value="{{ old('name')}}"><br/>
            Price:  <input type="text" name="price" value="{{ old('price') }}"> <br/>
