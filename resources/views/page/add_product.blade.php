@@ -3,10 +3,24 @@
 <div>
     <h4>Welcome to Add Product Page</h4>
     <div class="product_form">
+    @if (count($errors) > 0)
+    <!-- Form Error List -->
+    <div class="text-danger">
+      <strong>Whoops! Something went wrong!</strong>
+      <br>
+      <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+      </ul>
+    </div>
+    @else
+    {{ session('status') }}
+    @endif
         <form action="/product/create" method="POST">
             <input type="hidden" name="_token" value="{{  csrf_token()  }}">
             Category : <select name="category">
-                <option>Choose</option>
+                <option value="">Choose</option>
                 @foreach($categories as $category)
                 <option value="{{ $category->id }}"> {{ ucwords($category->name)}}</option>
                 @endforeach

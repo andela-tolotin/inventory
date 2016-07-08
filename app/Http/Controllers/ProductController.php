@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use Inventory\Http\Requests;
 use Inventory\Product;
-Inventory\Http\Requests\ProductRequest;
+use Inventory\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
@@ -19,7 +19,7 @@ class ProductController extends Controller
         ]);
 
         if (!is_null($product)) {
-            return rediect('/add-product')->with('status', 'Product Added Successfully');
+            return redirect('/add-product')->with('status', 'Product Added Successfully');
         }
 
         return rediect('/add-product')->with('status', 'Product Not Added Successfully');

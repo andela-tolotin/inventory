@@ -26,11 +26,27 @@ class ProductForm extends TestCase
 
     public function testThatProductFormWasFilledAndSubmitted()
     {
+        $category = factory('Inventory\Category')->create();
+        $product =  factory('Inventory\Product')->create();
+
         $this->visit('/add-product')
-        ->type('Product Name', 'name')
-        ->type('Product Category', 'category')
-        ->type('Product Price', 'price')
+        ->type('Sugar Cane', 'name')
+        ->select($category->id, 'category')
+        ->type(2000, 'price')
         ->press('Add')
         ->see('Product Added Successfully');
+    }
+
+    public function testThatProductFieldsAreEmpty()
+    {
+        $category = factory('Inventory\Category')->create();
+        $product =  factory('Inventory\Product')->create();
+
+        $this->visit('/add-product')
+        ->type('', 'name')
+        ->select($category->id, 'category')
+        ->type(2000, 'price')
+        ->press('Add')
+        ->see('The name field is required.');
     }
 }
