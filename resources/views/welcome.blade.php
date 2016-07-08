@@ -4,6 +4,7 @@
         <title>Laravel</title>
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
 
         <style>
             html, body {
@@ -38,7 +39,13 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Laravel 5</div>
+                <div class="title" style="font-size:22px;">
+                <h1>Welcome to my Laztopaz Inventory</h1>
+                    <ul class="list-inline">
+                     <li><a href="/add-product">Add Product</a></li>
+                     <li><a href="/search">Search</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </body>
